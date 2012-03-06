@@ -30,8 +30,41 @@ use strict;
 
 #Requiring the things we need.
 #use Nagios::Plugin;
-use Getopt::Std;
-
+use Getopt::Long;
 
 my %options;
-getopts("h:",\%options);
+GetOptions(\%options, "help", "h","version", "v", "check:s", "c:s", "all", "a");
+
+if ($options{help}||$options{h}) {
+	print <<HELP;
+	
+$0: A Nagios check script to check on your supervisor scripts.
+
+Syntax: $0 [--help or -h | --version or -v | --check=<SUPERVISOR_JOB_NAME> or -c=<SUPERVISOR_JOB_NAME> | --all or -a]
+
+	--help or -h		: This help message
+	--version or -v		: Print version on standard output and exit
+	--check or -c		: Checks a specified Supervisor job
+	--all or -a		: Checks all available Supervisor jobs (Same as version .1)
+	
+	Checks supervisorctl to see if specified or all programs are running.
+
+	This plugin is NOT developped by the Nagios Plugin group.
+	Please do not e-mail them for support on this plugin, since
+	they won't know what you're talking about.
+
+	Please contact steve.lippert\@gmail.com with questions.  Or visit https://github.com/stevelippert/check_supervisorctl
+HELP
+	exit;
+}elsif ($options{version}||$options{v}){
+	print "check_supervisorctl.pl, version .2\n";
+	exit;
+}elsif ($options{check}||$options{c}){
+	
+	print "I know this is the meat and potatoes of the script, but it isn't implemented yet.\n";
+	print($options{c}."\n");
+	exit;
+}elsif ($options{all}||$options{a}){
+	print "I know this is the meat and potatoes of the script, but it isn't implemented yet.\n";
+	exit;
+}
